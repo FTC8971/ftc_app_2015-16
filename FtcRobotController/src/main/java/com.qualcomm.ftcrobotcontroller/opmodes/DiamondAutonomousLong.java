@@ -135,7 +135,7 @@ public class DiamondAutonomousLong extends DiamondBotHardware_Larry
             // If they haven't, then the op-mode remains in this state (i.e this
             // block will be executed the next time this method is called).
             //
-            if (have_drive_encoders_reached (6530, 6530))
+            if (have_drive_encoders_reached (6630, 6630))
             {
                 //
                 // Reset the encoders to ensure they are at a known good value.
