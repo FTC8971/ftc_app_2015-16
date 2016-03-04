@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.util.Range;
  * the DiamondBot, when playing as red.
  *
  * @author SSI Robotics/Max Davy/DiamondBlades
- * @version 2016-01-19-15-51
+ * @version 2016-03-04-17-08
  */
 public class DiamondAutonomousLong extends DiamondBotHardware_Larry
 
