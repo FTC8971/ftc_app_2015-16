@@ -991,7 +991,7 @@ public class PushBotHardware extends OpMode
 
     //--------------------------------------------------------------------------
     //
-    // a_left_arm_power
+    // a_arm_power
     //
     /**
      * Access the left arm motor's power level.
@@ -1007,7 +1007,7 @@ public class PushBotHardware extends OpMode
 
         return l_return;
 
-    } // a_left_arm_power
+    } // a_arm_power
 
     double a_right_arm_power ()
     {
@@ -1020,7 +1020,7 @@ public class PushBotHardware extends OpMode
 
         return l_return;
 
-    } // a_left_arm_power
+    } // a_arm_power
 
     //--------------------------------------------------------------------------
     //

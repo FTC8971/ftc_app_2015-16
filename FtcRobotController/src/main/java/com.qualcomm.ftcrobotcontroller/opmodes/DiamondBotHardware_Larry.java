@@ -559,7 +559,7 @@ public class DiamondBotHardware_Larry extends OpMode
 
     //--------------------------------------------------------------------------
     //
-    // run_using_left_arm_encoder
+    // run_using_arm_encoder
     //
     /**
      * Set the left arm encoder to run, if the mode is appropriate.
@@ -574,11 +574,11 @@ public class DiamondBotHardware_Larry extends OpMode
                 );
         }
 
-    } // run_using_left_arm_encoder
+    } // run_using_arm_encoder
 
     //--------------------------------------------------------------------------
     //
-    // run_using_right_arm_encoder
+    // run_using_winder_encoder
     //
     /**
      * Set the right arm encoder to run, if the mode is appropriate.
@@ -959,7 +959,7 @@ public class DiamondBotHardware_Larry extends OpMode
 
     //--------------------------------------------------------------------------
     //
-    // has_left_arm_encoder_reached
+    // has_arm_encoder_reached
     //
     /**
      * Indicate whether the left arm motor's encoder has reached a value.
@@ -991,11 +991,11 @@ public class DiamondBotHardware_Larry extends OpMode
         //
         return l_return;
 
-    } // has_left_arm_encoder_reached
+    } // has_arm_encoder_reached
 
     //--------------------------------------------------------------------------
     //
-    // has_right_arm_encoder_reached
+    // has_winch_encoder_reached
     //
     /**
      * Indicate whether the right arm motor's encoder has reached a value.
@@ -1027,7 +1027,7 @@ public class DiamondBotHardware_Larry extends OpMode
         //
         return l_return;
 
-    } // has_right_arm_encoder_reached
+    } // has_winch_encoder_reached
 
     //--------------------------------------------------------------------------
     //
@@ -1226,7 +1226,7 @@ public class DiamondBotHardware_Larry extends OpMode
 
     //--------------------------------------------------------------------------
     //
-    // a_left_arm_power
+    // a_arm_power
     //
     /**
      * Access the left arm motor's power level.
@@ -1242,7 +1242,7 @@ public class DiamondBotHardware_Larry extends OpMode
 
         return l_return;
 
-    } // a_left_arm_power
+    } // a_arm_power
 
     double a_right_arm_power ()
     {
@@ -1255,7 +1255,7 @@ public class DiamondBotHardware_Larry extends OpMode
 
         return l_return;
 
-    } // a_left_arm_power
+    } // a_arm_power
 
     double a_tape_power ()
     {
