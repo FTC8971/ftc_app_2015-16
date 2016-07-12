@@ -1271,5 +1271,20 @@ public class DiamondBotHardware_IRI extends OpMode
         }
 
     }
+    //--------------------------------------------------------------------------
+    //Convert inches to encoder values
+    double inch_to_encoder(double inches){
+        double encoder = 0;
+        encoder = inches * 86.22;
+        return encoder;
+    }
+
+    //--------------------------------------------------------------------------
+    //Convert degrees to encoder values
+    double degree_to_encoder(double degrees){
+        double encoder = 0;
+        encoder = inch_to_encoder((16*3.14159*degrees)/320);//originally 360
+        return encoder;
+    }
 
 } // PushBotHardware
