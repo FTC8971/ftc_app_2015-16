@@ -59,8 +59,6 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
 
     @Override public void start ()
     {
-        m_right_flipper_position(.25);
-        m_left_flipper_position(1);
         m_bumper_position(.5);
         m_back_bumper_position(.5);
         m_triggers_position(0);
@@ -209,22 +207,6 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
 
         float l_left_drive_power = scale_motor_power (-gamepad1.left_stick_y); //set the drive motor power based on the joystick position
         float l_right_drive_power = scale_motor_power (-gamepad1.right_stick_y); //set the drive motor power based on the joystick position
-        if (gamepad2.right_stick_y > 0)
-        {
-            m_right_flipper_position(.357);
-            m_left_flipper_position(.9);
-            set_first_message("Right Flipper Position: " + a_right_flipper_position()+", Left Flipper Position: "+a_left_flipper_position());
-        }
-        else if (gamepad2.right_stick_y < 0)
-        {
-            m_right_flipper_position(.25);
-            m_left_flipper_position(1);
-            set_first_message("Right Flipper Position: " + a_right_flipper_position()+", Left Flipper Position: "+a_left_flipper_position());
-        }
-        else
-        {
-            set_first_message("Right Flipper Position: " + a_right_flipper_position()+", Left Flipper Position: "+a_left_flipper_position());
-        }
 
         if (gamepad1.left_stick_button) //but if the joystick button is pressed
         {
