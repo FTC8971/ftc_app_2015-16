@@ -229,6 +229,7 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
         // Manage the arm motors.
         //
         float l_arm_power = scale_motor_power (gamepad2.left_stick_y)/3; //set the arm power based on the joystick position
+        float l_flipper_power = scale_arm_motor_power(gamepad2.right_stick_y);//set the flipper motor power based on joystick position
         float l_winder_power; //initialize variable
         float l_tape_power;
 
@@ -246,20 +247,20 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
         }
         if (gamepad2.a)
         {
-            l_tape_power = 1; //set the arm power based on the joystick position
-        }
-        else if (gamepad2.y)
+            l_tape_power = 1; //set the tape power if the button is pressed
+        } else if (gamepad2.y)
         {
-            l_tape_power = -1; //set the arm power based on the joystick position
+            l_tape_power = -1; //set the tape power if the button is pressed
         }
         else
         {
-            l_tape_power = 0; //set the arm power based on the joystick position
+            l_tape_power = 0; //set the tape power to 0
         }
 
         m_arm_power (l_arm_power); //apply the arm power
-        m_winder_power (l_winder_power); //apply the arm power
+        m_winder_power (l_winder_power); //apply the winch power
         m_tape_power(l_tape_power); //apply the tape power
+        m_flipper_power(l_flipper_power);//apply the flipper power.
 
         //----------------------------------------------------------------------
         //
