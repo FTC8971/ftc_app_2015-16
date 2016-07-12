@@ -97,11 +97,13 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("PushBotDriveTouch", PushBotDriveTouch.class);
     //manager.register("PushBotIrSeek", PushBotIrSeek.class);
     //manager.register("PushBotSquare", PushBotSquare.class);
-    manager.register("DiamondBotFlipperTest", DiamondFlipperTest.class);
+    //manager.register("DiamondBotFlipperTest", DiamondFlipperTest.class);
     manager.register("DiamondBotAutonomous - Long", DiamondAutonomousLong.class);
     manager.register("DiamondAutonomous - Short", DiamondAutonomousShort.class);
     manager.register("DiamondTeleOp", DiamondTeleOp.class);
     manager.register("DiamondTeleOp 'Larry'", DiamondTeleOp_Larry.class);
+    manager.register("DiamondTeleOp IRI", DiamondTeleOp_IRI.class);
+    manager.register("DiamondAutonomous IRI", DiamondAutonomousIRI.class);
     //manager.register("DiamondTeleOp2", DiamondTeleOp2.class);
     //manager.register("RobotMk3", RobotMk3.class);
 
