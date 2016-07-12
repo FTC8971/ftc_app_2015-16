@@ -112,6 +112,13 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
                 );
         telemetry.addData
                 ( "05"
+                        , "Flipper Motor: Power="
+                                + a_flipper_power()
+                                + ", Encoder Value="
+                                + a_flipper_encoder_count()
+                );
+        telemetry.addData
+                ( "06"
                         , "Front Bumper="
                                 +a_bumper_position()
                                 +", Back Bumper="
@@ -119,7 +126,7 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
 
                 );
         telemetry.addData
-                ( "06"
+                ( "07"
                         , "Trigger="
                                 +a_triggers_position()
                                 +", Other Trigger="
@@ -142,31 +149,31 @@ public class DiamondTeleOp_IRI extends DiamondBotHardware_IRI
         //
         // Send telemetry data concerning gamepads to the driver station.
         //
-        telemetry.addData ("07", "Gamepad 1 Left Joystick: " + -gamepad1.left_stick_y);
-        telemetry.addData ("08", "Gamepad 1 Right Joystick: " + -gamepad1.right_stick_y);
-        telemetry.addData ("19", "Gamepad 1 Left Trigger: " + gamepad1.left_trigger);
-        telemetry.addData ("10", "Gamepad 1 Right Trigger: " + gamepad1.right_trigger);
-        telemetry.addData ("11", "Gamepad 1 A Button: " + gamepad1.a);
-        telemetry.addData ("12", "Gamepad 1 B Button: " + gamepad1.b);
-        telemetry.addData ("13", "Gamepad 1 X Button: " + gamepad1.x);
-        telemetry.addData ("14", "Gamepad 1 Y Button: " + gamepad1.y);
-        telemetry.addData ("15", "Gamepad 1 Up Button: " + gamepad1.dpad_up);
-        telemetry.addData ("16", "Gamepad 1 Down Button: " + gamepad1.dpad_down);
-        telemetry.addData ("17", "Gamepad 1 Left Button: " + gamepad1.dpad_left);
-        telemetry.addData ("18", "Gamepad 1 Right Button: " + gamepad1.dpad_right);
+        telemetry.addData ("08", "Gamepad 1 Left Joystick: " + -gamepad1.left_stick_y);
+        telemetry.addData ("09", "Gamepad 1 Right Joystick: " + -gamepad1.right_stick_y);
+        telemetry.addData ("10", "Gamepad 1 Left Trigger: " + gamepad1.left_trigger);
+        telemetry.addData ("11", "Gamepad 1 Right Trigger: " + gamepad1.right_trigger);
+        telemetry.addData ("12", "Gamepad 1 A Button: " + gamepad1.a);
+        telemetry.addData ("13", "Gamepad 1 B Button: " + gamepad1.b);
+        telemetry.addData ("14", "Gamepad 1 X Button: " + gamepad1.x);
+        telemetry.addData ("15", "Gamepad 1 Y Button: " + gamepad1.y);
+        telemetry.addData ("16", "Gamepad 1 Up Button: " + gamepad1.dpad_up);
+        telemetry.addData ("17", "Gamepad 1 Down Button: " + gamepad1.dpad_down);
+        telemetry.addData ("18", "Gamepad 1 Left Button: " + gamepad1.dpad_left);
+        telemetry.addData ("19", "Gamepad 1 Right Button: " + gamepad1.dpad_right);
         //
-        telemetry.addData ("19", "Gamepad 2 Left Joystick: " + -gamepad2.left_stick_y);
-        telemetry.addData ("20", "Gamepad 2 Right Joystick: " + -gamepad2.right_stick_y);
-        telemetry.addData ("21", "Gamepad 2 Left Trigger: " + gamepad2.left_trigger);
-        telemetry.addData ("22", "Gamepad 2 Right Trigger: " + gamepad2.right_trigger);
-        telemetry.addData ("23", "Gamepad 2 A Button: " + gamepad2.a);
-        telemetry.addData ("24", "Gamepad 2 B Button: " + gamepad2.b);
-        telemetry.addData ("25", "Gamepad 2 X Button: " + gamepad2.x);
-        telemetry.addData ("26", "Gamepad 2 Y Button: " + gamepad2.y);
-        telemetry.addData ("27", "Gamepad 2 Up Button: " + gamepad2.dpad_up);
-        telemetry.addData ("28", "Gamepad 2 Down Button: " + gamepad2.dpad_down);
-        telemetry.addData ("29", "Gamepad 2 Left Button: " + gamepad2.dpad_left);
-        telemetry.addData ("30", "Gamepad 2 Right Button: " + gamepad2.dpad_right);
+        telemetry.addData ("20", "Gamepad 2 Left Joystick: " + -gamepad2.left_stick_y);
+        telemetry.addData ("21", "Gamepad 2 Right Joystick: " + -gamepad2.right_stick_y);
+        telemetry.addData ("22", "Gamepad 2 Left Trigger: " + gamepad2.left_trigger);
+        telemetry.addData ("23", "Gamepad 2 Right Trigger: " + gamepad2.right_trigger);
+        telemetry.addData ("24", "Gamepad 2 A Button: " + gamepad2.a);
+        telemetry.addData ("25", "Gamepad 2 B Button: " + gamepad2.b);
+        telemetry.addData ("26", "Gamepad 2 X Button: " + gamepad2.x);
+        telemetry.addData ("27", "Gamepad 2 Y Button: " + gamepad2.y);
+        telemetry.addData ("28", "Gamepad 2 Up Button: " + gamepad2.dpad_up);
+        telemetry.addData ("29", "Gamepad 2 Down Button: " + gamepad2.dpad_down);
+        telemetry.addData ("30", "Gamepad 2 Left Button: " + gamepad2.dpad_left);
+        telemetry.addData ("31", "Gamepad 2 Right Button: " + gamepad2.dpad_right);
 
 
     } // update_gamepad_telemetry
