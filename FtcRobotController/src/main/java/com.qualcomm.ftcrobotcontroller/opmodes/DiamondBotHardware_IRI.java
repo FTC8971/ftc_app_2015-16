@@ -172,6 +172,7 @@ public class DiamondBotHardware_IRI extends OpMode
     private DcMotor v_motor_arm;//arm motor
     private DcMotor v_motor_winder;//winch motor
     private DcMotor v_motor_tape;//tape shooter motor
+    private DcMotor v_motor_flippers;//flipper motor
 
     //--------------------------------------------------------------------------
     // servo variable declaration
@@ -263,6 +264,18 @@ public class DiamondBotHardware_IRI extends OpMode
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_motor_tape = null;
+        }
+
+        try
+        {
+            v_motor_flippers = hardwareMap.dcMotor.get ("flippers");
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("flippers");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_motor_flippers = null;
         }
 
         //--------------------------------------------------------------------------
@@ -436,7 +449,7 @@ public class DiamondBotHardware_IRI extends OpMode
 
     }
     //--------------------------------------------------------------------------
-    //separate scaling for the arm motor.
+    //separate scaling for the arm motor (in case the arm power needs to be lower)
     float scale_arm_motor_power (float p_power)
     {
         float l_scale = 0.0f;// Assume no scaling.
@@ -549,6 +562,20 @@ public class DiamondBotHardware_IRI extends OpMode
     }
 
     //--------------------------------------------------------------------------
+    //Set the flipper encoder to run, if the mode is appropriate.
+    public void run_using_flipper_encoder()
+
+    {
+        if (v_motor_flippers != null)
+        {
+            v_motor_flippers.setMode
+                    (DcMotorController.RunMode.RUN_USING_ENCODERS
+                    );
+        }
+
+    }
+
+    //--------------------------------------------------------------------------
     //Set the left drive wheel encoder to run, if the mode is appropriate.
     public void run_using_left_drive_encoder ()
 
@@ -599,7 +626,7 @@ public class DiamondBotHardware_IRI extends OpMode
         run_using_arm_encoder();
         run_using_winder_encoder();
         run_using_tape_encoder();
-
+        run_using_flipper_encoder();
     }
 
     //--------------------------------------------------------------------------
@@ -717,6 +744,19 @@ public class DiamondBotHardware_IRI extends OpMode
 
     }
 
+    //--------------------------------------------------------------------------
+    //Reset the flipper motor encoder.
+    public void reset_flipper_encoder ()
+
+    {
+        if (v_motor_flippers != null)
+        {
+            v_motor_flippers.setMode
+                    ( DcMotorController.RunMode.RESET_ENCODERS
+                    );
+        }
+
+    }
 
     //--------------------------------------------------------------------------
     //Reset both drive wheel encoders.
@@ -730,17 +770,6 @@ public class DiamondBotHardware_IRI extends OpMode
     }
 
     //--------------------------------------------------------------------------
-    //Reset arm, winch, and tape encoders.
-    public void reset_arm_encoders ()
-
-    {
-        // Call other members to perform the action on all three motors.
-        reset_arm_encoder();
-        reset_winder_encoder();
-        reset_tape_encoder();
-
-    }
-    //--------------------------------------------------------------------------
     //Reset all motor encoders
     public void reset_all_encoders ()
 
@@ -751,7 +780,7 @@ public class DiamondBotHardware_IRI extends OpMode
         reset_arm_encoder();
         reset_winder_encoder();
         reset_tape_encoder();
-
+        reset_flipper_encoder();
     }
 
     //--------------------------------------------------------------------------
@@ -831,20 +860,21 @@ public class DiamondBotHardware_IRI extends OpMode
     }
 
     //--------------------------------------------------------------------------
-    //set the power for the arm and the winch (never use this, but it causes an error when removed)
-    void set_arm_power (double p_left_power, double p_right_power)
+    //Read the encoder count on the flipper motor
+    int a_flipper_encoder_count ()
 
     {
-        if (v_motor_arm != null)
+        int l_return = 0;
+
+        if (v_motor_flippers != null)
         {
-            v_motor_arm.setPower (p_left_power);
-        }
-        if (v_motor_winder != null)
-        {
-            v_motor_winder.setPower (p_right_power);
+            l_return = v_motor_flippers.getCurrentPosition ();
         }
 
+        return l_return;
+
     }
+
 
     //--------------------------------------------------------------------------
     //get whether arm encoder has reached the specified value
@@ -887,24 +917,6 @@ public class DiamondBotHardware_IRI extends OpMode
     }
 
     //--------------------------------------------------------------------------
-    //get whether winch and tape encoders have both reached the specified value (we don't use this but it causes an error when removed)
-    boolean have_arm_encoders_reached( double p_left_count, double p_right_count)
-
-    {
-        boolean l_return = false;// Assume failure.
-
-        if (has_arm_encoder_reached(p_left_count) &&
-            has_winch_encoder_reached(p_right_count))// Have the encoders reached the specified values?
-        {
-            l_return = true;// Set the status to a positive indication.
-        }
-
-        return l_return;// Return the status.
-
-    }
-
-
-    //--------------------------------------------------------------------------
     //get whether the arm encoder has finished reseting
     boolean has_arm_encoder_reset()
     {
@@ -933,6 +945,22 @@ public class DiamondBotHardware_IRI extends OpMode
         return l_return;// Return the status.
 
     }
+
+    //--------------------------------------------------------------------------
+    //get whether the flipper encoder is finished resetting
+    boolean has_flipper_encoder_reset()
+    {
+        boolean l_return = false;// Assume failure.
+
+        if (a_flipper_encoder_count() == 0)// Has the right encoder reached zero?
+        {
+            l_return = true;// Set the status to a positive indication.
+        }
+
+        return l_return;// Return the status.
+
+    }
+
     //--------------------------------------------------------------------------
     //get the arm motor's power level
     double a_arm_power()
@@ -961,6 +989,7 @@ public class DiamondBotHardware_IRI extends OpMode
         return l_return;
 
     }
+
     //--------------------------------------------------------------------------
     //get the tape motor's power level
     double a_tape_power ()
@@ -970,6 +999,21 @@ public class DiamondBotHardware_IRI extends OpMode
         if (v_motor_tape != null)//if the motor's mapped
         {
             l_return = v_motor_tape.getPower ();//return it's power
+        }
+
+        return l_return;
+
+    }
+
+    //--------------------------------------------------------------------------
+    //get the flipper motor's power level
+    double a_flipper_power ()
+    {
+        double l_return = 0.0;//assume it's stopped
+
+        if (v_motor_flippers != null)//if the motor's mapped
+        {
+            l_return = v_motor_flippers.getPower ();//return it's power
         }
 
         return l_return;
@@ -996,6 +1040,7 @@ public class DiamondBotHardware_IRI extends OpMode
         }
 
     } // m_left_arm_power
+
     //--------------------------------------------------------------------------
     //set tape power
     void m_tape_power (double p_level)
@@ -1006,6 +1051,18 @@ public class DiamondBotHardware_IRI extends OpMode
         }
 
     }
+
+    //--------------------------------------------------------------------------
+    //set flipper motor power
+    void m_flipper_power (double p_level)
+    {
+        if (v_motor_flippers != null)
+        {
+            v_motor_flippers.setPower (p_level);
+        }
+
+    }
+
     //--------------------------------------------------------------------------
     //Indicate whether the left drive motor's encoder has reached a value.
     boolean has_left_drive_encoder_reached (double p_count)
@@ -1067,7 +1124,7 @@ public class DiamondBotHardware_IRI extends OpMode
     {
         boolean l_return = false;// Assume failure.
 
-        if (a_left_encoder_count () == 0)// Has the left encoder reached zero?
+        if (a_left_encoder_count() == 0)// Has the left encoder reached zero?
         {
             l_return = true;// Set the status to a positive indication.
         }
